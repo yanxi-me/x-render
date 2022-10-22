@@ -1,6 +1,6 @@
 import { Tabs } from 'antd';
 import FormRender, { useForm } from 'form-render';
-import { deserialize, serializeToDraft } from "fr-generator"
+import { deserialize, serializeToDraft } from 'fr-generator';
 import parseJson from 'json-parse-better-errors';
 import { useEffect, useState } from 'react';
 import AsyncSelect from './customized/AsyncSelect';
@@ -93,12 +93,21 @@ const Demo = ({ schemaName, theme, ...formProps }) => {
           {error ? (
             <div>{error}</div>
           ) : (
-            <FormRender
-              form={form}
-              schema={schema}
-              {...formProps}
-              widgets={{ asyncSelect: AsyncSelect }}
-            />
+            <>
+              <FormRender
+                form={form}
+                schema={schema}
+                {...formProps}
+                widgets={{ asyncSelect: AsyncSelect }}
+              />
+              <button
+                onClick={() => {
+                  form.setValues({ input2: 'haha' });
+                }}
+              >
+                set data
+              </button>
+            </>
           )}
         </div>
       </div>
