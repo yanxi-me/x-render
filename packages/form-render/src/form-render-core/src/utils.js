@@ -103,9 +103,7 @@ export function getDataPath(id, dataIndex) {
 }
 
 export function isObjType(schema) {
-  return (
-    schema && schema.type === 'object' && schema.properties && !schema.widget
-  );
+  return schema && schema.type === 'object' && schema.properties;
 }
 
 export function isBlockType(schema) {
