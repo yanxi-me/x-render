@@ -2,6 +2,7 @@ import { Tooltip } from 'antd';
 import React from 'react';
 import { useStore2, useTools } from '../../hooks';
 import { isCheckBoxType } from '../../utils';
+import { getRealDataPath } from '../../void';
 
 const Description = ({ displayType, schema }) => {
   const { description, descType, descWidget } = schema;
@@ -52,6 +53,7 @@ const Description = ({ displayType, schema }) => {
 };
 
 const Title = ({
+  $id,
   labelClass,
   labelStyle,
   schema,
@@ -120,7 +122,7 @@ const Title = ({
               ? 'no-colon'
               : ''
           }`} // checkbox不带冒号
-          title={title}
+          title={getRealDataPath($id)}
         >
           {TitleRequiredMark}
           <span
