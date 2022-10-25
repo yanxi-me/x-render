@@ -2,6 +2,7 @@
 import { set, sortedUniqBy, get, isEmpty, isFunction } from 'lodash-es';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSet } from './hooks';
+import { getRealDataFlatten } from './void';
 import { processData, transformDataWithBind2 } from './processData';
 import SmoothScroll from 'smooth-scroll';
 import {
@@ -492,9 +493,10 @@ const useForm = props => {
       });
     }
     setState({ isValidating: true });
+    const flatten = getRealDataFlatten(_finalFlatten.current);
     return validateAll({
       formData: data,
-      flatten: _finalFlatten.current,
+      flatten,
       options: {
         locale: localeRef.current,
         validateMessages: validateMessagesRef.current,
@@ -508,15 +510,11 @@ const useForm = props => {
       if (!isEmpty(errors)) {
         return Promise.reject({
           errors: errors,
-          data: processData(
-            data,
-            _finalFlatten.current,
-            removeHiddenDataRef.current
-          ),
+          data: processData(data, flatten, removeHiddenDataRef.current),
         });
       } else {
         return Promise.resolve(
-          processData(data, _finalFlatten.current, removeHiddenDataRef.current)
+          processData(data, flatten, removeHiddenDataRef.current)
         );
       }
     });

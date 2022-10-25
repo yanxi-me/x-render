@@ -15,7 +15,65 @@
       },
       "$void_1": {
         "type": "object",
-        "title": "void test",
+        "title": "$void_1",
+        "properties": {
+          "$void_2": {
+            "type": "object",
+            "title": "$void_2",
+            "properties": {
+              "obj2222": {
+                "type": "object",
+                "title": "obj2222",
+                "properties": {
+                  "input2": {
+                    "title": "input2",
+                    "type": "string",
+                    "required": true,
+                    "disabled": "{{formData.obj2.input3 == 1}}"
+                  },
+                  "input3": {
+                    "title": "input3",
+                    "type": "string",
+                    "min": 6,
+                    "rules": [
+                      {
+                        "pattern": "^[A-Za-z0-9]+$",
+                        "message": "只允许填写英文字母和数字"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "obj2": {
+            "type": "object",
+            "title": "obj2",
+            "properties": {
+              "input2": {
+                "title": "input2",
+                "type": "string",
+                "required": true,
+                "disabled": "{{formData.obj2.input3 == 1}}"
+              },
+              "input3": {
+                "title": "input3",
+                "type": "string",
+                "min": 6,
+                "rules": [
+                  {
+                    "pattern": "^[A-Za-z0-9]+$",
+                    "message": "只允许填写英文字母和数字"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "test2": {
+        "type": "object",
+        "title": "test2",
         "properties": {
           "input2": {
             "title": "简单输入框",
@@ -27,28 +85,6 @@
                 "message": "只允许填写英文字母和数字"
               }
             ]
-          }
-        }
-      },
-      "listName2": {
-        "title": "对象数组",
-        "description": "对象数组嵌套功能",
-        "type": "array",
-        "min": 1,
-        "max": 3,
-        "items": {
-          "type": "object",
-          "properties": {
-            "input1": {
-              "title": "简单输入框",
-              "type": "string"
-            },
-            "select1": {
-              "title": "单选",
-              "type": "string",
-              "enum": ["a", "b", "c"],
-              "enumNames": ["早", "中", "晚"]
-            }
           }
         }
       }

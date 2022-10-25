@@ -16,6 +16,10 @@ export function getRealDataPath(path) {
   return path.replace(/[$]void_[^.]+./g, '');
 }
 
+export function isVoidKey(key) {
+  return key.match(/^[$]void_[^.]+$/);
+}
+
 export function getRealDataFlatten(flatten) {
   // 处理 $void_xxx
   const flatten2 = { ...flatten };

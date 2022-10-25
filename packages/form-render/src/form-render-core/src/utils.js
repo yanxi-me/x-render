@@ -1,5 +1,5 @@
 import { cloneDeep, get, isEmpty, set } from 'lodash-es';
-import { getRealDataPath } from './void';
+import { getRealDataPath, isVoidKey } from './void';
 
 export function getParamByName(name, url = window.location.href) {
   name = name.replace(/[\[\]]/g, '\\$&');
@@ -766,9 +766,27 @@ export const getDescriptorSimple = (schema = {}, path) => {
 
 // _path 只供内部递归使用
 export const generateDataSkeleton = (schema, formData) => {
+  schema = clone(schema);
   let _formData = clone(formData);
   let result = _formData;
   if (isObjType(schema)) {
+    while (true) {
+      let hasVoidKey = false;
+      Object.keys(schema.properties).forEach(key => {
+        if (isVoidKey(key)) {
+          hasVoidKey = true;
+          schema.properties = {
+            ...schema.properties,
+            ...schema.properties[key].properties,
+          };
+          delete schema.properties[key];
+        }
+      });
+      if (!hasVoidKey) {
+        break;
+      }
+    }
+
     if (_formData === undefined || typeof _formData !== 'object') {
       _formData = {};
       result = {};
